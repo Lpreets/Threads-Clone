@@ -1,40 +1,34 @@
 import mongoose from "mongoose";
 
-const communitySchema = new mongoose.Schema({
-  id: {
+const threadSchema = new mongoose.Schema({
+  text: {
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  image: String,
-  bio: String,
-  createdBy: {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
-  threads: [
+  community: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Community",
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  parentId: {
+    type: String,
+  },
+  children: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Thread",
     },
   ],
-  members: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
 });
 
-const Community =
-  mongoose.models.Community || mongoose.model("Community", communitySchema);
+const Thread = mongoose.models.Thread || mongoose.model("Thread", threadSchema);
 
-export default Community;
+export default Thread;

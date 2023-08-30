@@ -55,53 +55,39 @@ interface Params {
   path: string,
 }
 
-export async function createThread({ text, author, communityId, path }: Params) {
-    if (!text || !author || !communityId || !path) {
-        throw new Error("All required parameters must be provided");
-      }
-      
-    
-    try {
-      connectToDB();
-      console.log('Parameters:', { text, author, communityId, path });  // Debugging line
-  
-      if (!communityId) {
-        throw new Error("Community ID must be provided");
-      }
-  
-      const communityIdObject = await Community.findOne({ id: communityId });
-  
-      if (!communityIdObject) {
-        throw new Error("Community not found for the provided ID");
-      }
-      if (!communityIdObject._id) {
-        throw new Error("Community object doesn't contain _id");
-      }
-  
-      console.log('Author:', author);  // Debugging line
-      console.log('Community ID Object:', communityIdObject);  // Debugging line
-  
-      const createdThread = await Thread.create({
-        text,
-        author,
-        community: communityIdObject._id,
-      });
-  
-      await User.findByIdAndUpdate(author, {
+export async function createThread({ text, author, communityId, path }: Params
+) {
+  try {
+    connectToDB();
+
+    const communityIdObject = await Community.findOne(
+      { id: communityId },
+      { _id: 1 }
+    );
+
+    const createdThread = await Thread.create({
+      text,
+      author,
+      community: communityIdObject, // Assign communityId if provided, or leave it null for personal account
+    });
+
+    // Update User model
+    await User.findByIdAndUpdate(author, {
+      $push: { threads: createdThread._id },
+    });
+
+    if (communityIdObject) {
+      // Update Community model
+      await Community.findByIdAndUpdate(communityIdObject, {
         $push: { threads: createdThread._id },
       });
-  
-      await Community.findByIdAndUpdate(communityIdObject._id, {
-        $push: { threads: createdThread._id },
-      });
-  
-      revalidatePath(path);
-    } catch (error: any) {
-      console.error("Error details:", error);  // Debugging line
-      throw new Error(`Failed to create thread: ${error.message}`);
     }
+
+    revalidatePath(path);
+  } catch (error: any) {
+    throw new Error(`Failed to create thread: ${error.message}`);
   }
-  
+}
 
 async function fetchAllChildThreads(threadId: string): Promise<any[]> {
   const childThreads = await Thread.find({ parentId: threadId });

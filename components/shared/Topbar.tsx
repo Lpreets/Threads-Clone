@@ -26,7 +26,7 @@ function Topbar() {
             </SignOutButton>
           </SignedIn>
         </div>
-        <h1 className="text-light-1 block max-md:hidden">[Clerk OrganizationSwticher not working Currently]</h1>
+        <h1 className="text-light-1 block max-md:hidden">[Clerk OrganizationSwticher currently not working]</h1>
         <OrganizationSwitcher
           appearance={{
             baseTheme: dark,
