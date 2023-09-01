@@ -14,8 +14,16 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Threads-Clone",
-  description: "A Next.js 13 Meta Threads application",
+  description: "A Next.js 13 Meta Threads Clone application",
+  openGraph: {
+    title: "Threads-Clone",
+    description: "A Next.js 13 Threads Clone application",
+    type: "website",
+    url: "https://threads-clone-lpreet.vercel.app/",
+    images: "https://threads-clone-lpreet.vercel.app/logo.svg",
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -36,7 +44,6 @@ export default function RootLayout({
             <section className='main-container'>
               <div className='w-full max-w-4xl'>{children}</div>
             </section>
-            {/* @ts-ignore */}
             <RightSidebar />
           </main>
           <Bottombar />
