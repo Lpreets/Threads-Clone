@@ -3,7 +3,10 @@ import { dark } from "@clerk/themes";
 import Image from "next/image";
 import Link from "next/link";
 
+
 function Topbar() {
+  const isUserLoggedIn = true;
+
   return (
     <nav className='topbar'>
       <Link href='/' className='flex items-center gap-4'>
@@ -26,7 +29,6 @@ function Topbar() {
             </SignOutButton>
           </SignedIn>
         </div>
-        <h1 className="text-light-1 block max-md:hidden">[Clerk OrganizationSwticher currently not working]</h1>
         <OrganizationSwitcher
           appearance={{
             baseTheme: dark,
