@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Threads Clone by Lovepreet Zelenkov Singh",
   description: "Threads Clone by Lovepreet Zelenkov Singh",
   openGraph: {
-    title: "Threads Clone",
+    title: "Threads Clone by Lovepreet Zelenkov Singh",
     description: "Threads Clone by Lovepreet Zelenkov Singh",
     type: "website",
     url: "https://threads-clone-lpreet.vercel.app/",
