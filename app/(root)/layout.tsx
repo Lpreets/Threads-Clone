@@ -13,11 +13,11 @@ import Topbar from "@/components/shared/Topbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Threads-Clone",
-  description: "A Next.js 13 Meta Threads Clone application",
+  title: "Threads Clone by Lovepreet Zelenkov Singh",
+  description: "Threads Clone by Lovepreet Zelenkov Singh",
   openGraph: {
-    title: "Threads-Clone",
-    description: "A Next.js 13 Threads Clone application",
+    title: "Threads Clone",
+    description: "Threads Clone by Lovepreet Zelenkov Singh",
     type: "website",
     url: "https://threads-clone-lpreet.vercel.app/",
     images: "https://threads-clone-lpreet.vercel.app/logo.svg",
